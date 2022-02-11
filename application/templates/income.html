@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block body_content %}
+    <form action='' method='POST'>
+        {{ form.hidden_tag() }}
+        {{ form.annual_salary.label }} {{ form.annual_salary }} <br>
+        {% if form.annual_salary.errors %}
+            {% for error in form.annual_salary.errors %}
+                {{ error }}<br>
+            {% endfor %}
+        {% endif %}
+        {{ form.submit }}
+    </form>
+{% endblock body_content %}
