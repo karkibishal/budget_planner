@@ -5,25 +5,54 @@ from application.forms import IncomeForm
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    annual_salary = Income.query.first()
+    annual_salary = Income.query.all()
     return render_template('index.html', title="Budget Planner", annual_salary=annual_salary)
 
 @app.route('/income', methods=['POST', 'GET'])
 def income():
     form = IncomeForm()
     if form.validate_on_submit():
-        if form.selection.data == "annual":
-            salary = form.annual_salary.data
-        elif form.selection.data == "monthly":
-            salary = form.annual_salary.data * 12
-        elif form.selection.data == "weekly":
-            salary = form.annual_salary.data * 52 
+        if form.select_salary.data == "annual":
+            salary = form.salary.data
+        elif form.select_salary.data == "monthly":
+            salary = form.salary.data * 12
+        elif form.select_salary.data == "weekly":
+            salary = form.salary.data * 52 
+
+        if form.select_tax.data == "annual":
+            tax = form.tax.data
+        elif form.select_tax.data == "monthly":
+            tax = form.tax.data * 12
+        elif form.select_tax.data == "weekly":
+            tax = form.tax.data * 52
+
+        if form.select_ni.data == "annual":
+            ni = form.ni.data
+        elif form.select_ni.data == "monthly":
+            ni = form.ni.data * 12
+        elif form.select_ni.data == "weekly":
+            ni = form.ni.data * 52
+            
+        if form.select_pension.data == "annual":
+            pension = form.pension.data
+        elif form.select_pension.data == "monthly":
+            pension = form.pension.data * 12
+        elif form.select_pension.data == "weekly":
+            pension = form.pension.data * 52
+
+        if form.select_student_loan.data == "annual":
+            student_loan = form.student_loan.data
+        elif form.select_student_loan.data == "monthly":
+            student_loan = form.student_loan.data * 12
+        elif form.select_student_loan.data == "weekly":
+            student_loan = form.student_loan.data * 52
+
         income = Income(
-                    annual_salary = salary,
-                    tax = form.tax.data,
-                    ni = form.ni.data,
-                    pension = form.pension.data,
-                    student_loan = form.student_loan.data
+                    salary = salary,
+                    tax = tax,
+                    ni = ni,
+                    pension = pension,
+                    student_loan = student_loan
                     )
         db.session.add(income)
         db.session.commit()

@@ -17,7 +17,7 @@ class Items(db.Model):
 
 class Income(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    annual_salary = db.Column(db.Float, nullable = False)
+    salary = db.Column(db.Float, nullable = False)
     tax = db.Column(db.Float, nullable = False)
     ni = db.Column(db.Float, nullable = False)
     pension = db.Column(db.Float, nullable = False)

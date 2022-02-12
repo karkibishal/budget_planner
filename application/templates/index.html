@@ -1,4 +1,10 @@
 {% extends 'layout.html' %}
 {% block body_content %}
-    {{ annual_salary }}
+    {% for item in annual_salary %}
+        {{ item.salary }}<br>
+        {{ item.tax }}<br>
+        {{ item.ni }}<br>
+        {{ item.pension }}<br>
+        {{ item.student_loan }}
+    {% endfor %}
 {% endblock body_content %}

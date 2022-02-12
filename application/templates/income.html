@@ -2,13 +2,42 @@
 {% block body_content %}
     <form action='' method='POST'>
         {{ form.hidden_tag() }}
-        {{ form.selection }}
-        {{ form.annual_salary.label }} {{ form.annual_salary }} <br>
-        {% if form.annual_salary.errors %}
-            {% for error in form.annual_salary.errors %}
+        
+        {{ form.salary.label }} {{ form.select_salary }} {{ form.salary }} <br>
+        {% if form.salary.errors %}
+            {% for error in form.salary.errors %}
                 {{ error }}<br>
             {% endfor %}
         {% endif %}
+
+        {{ form.tax.label }} {{ form.select_tax }} {{ form.tax }} <br>
+        {% if form.tax.errors %}
+            {% for error in form.tax.errors %}
+                {{ error }}<br>
+            {% endfor %}
+        {% endif %}
+
+        {{ form.ni.label }} {{ form.select_ni }} {{ form.ni }} <br>
+        {% if form.ni.errors %}
+            {% for error in form.ni.errors %}
+                {{ error }}<br>
+            {% endfor %}
+        {% endif %}
+
+        {{ form.pension.label }} {{ form.select_pension }} {{ form.pension }} <br>
+        {% if form.pension.errors %}
+            {% for error in form.pension.errors %}
+                {{ error }}<br>
+            {% endfor %}
+        {% endif %}
+
+        {{ form.student_loan.label }} {{ form.select_student_loan }} {{ form.student_loan }} <br>
+        {% if form.student_loan.errors %}
+            {% for error in form.student_loan.errors %}
+                {{ error }}<br>
+            {% endfor %}
+        {% endif %}
+
         {{ form.submit }}
     </form>
 {% endblock body_content %}

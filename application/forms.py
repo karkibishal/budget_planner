@@ -1,21 +1,44 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, DateField, DecimalField
-from wtforms.validators import DataRequired, NumberRange, ValidationError
+from wtforms.validators import InputRequired, NumberRange, ValidationError
 
 from application.models import Income
 
 class IncomeForm(FlaskForm):
-    selection = SelectField(choices=[
+    select_salary = SelectField(choices=[
                             ("annual", "annual"),
                             ("monthly", "monthly"),
                             ("weekly", "weekly")
                             ])
-    annual_salary = DecimalField("Salary", 
-                                validators = [DataRequired(), NumberRange(min=0)])
-    tax = DecimalField("Tax")
-    ni = DecimalField("NI contribution")
-    pension = DecimalField("Pension contribution")
-    student_loan = DecimalField("Student Loan Repayment")
+    salary = DecimalField("Salary", validators = [InputRequired(), NumberRange(min=0)])
+
+    select_tax = SelectField(choices=[
+                            ("annual", "annual"),
+                            ("monthly", "monthly"),
+                            ("weekly", "weekly")
+                            ])
+    tax = DecimalField("Tax", validators = [InputRequired(), NumberRange(min=0)])
+
+    select_ni = SelectField(choices=[
+                            ("annual", "annual"),
+                            ("monthly", "monthly"),
+                            ("weekly", "weekly")
+                            ])
+    ni = DecimalField("NI contribution", validators = [InputRequired(), NumberRange(min=0)])
+
+    select_pension = SelectField(choices=[
+                            ("annual", "annual"),
+                            ("monthly", "monthly"),
+                            ("weekly", "weekly")
+                            ])
+    pension = DecimalField("Pension contribution", validators = [InputRequired(), NumberRange(min=0)])
+
+    select_student_loan = SelectField(choices=[
+                            ("annual", "annual"),
+                            ("monthly", "monthly"),
+                            ("weekly", "weekly")
+                            ])
+    student_loan = DecimalField("Student Loan Repayment", validators = [InputRequired(), NumberRange(min=0)])
     
     submit = SubmitField("Submit")
 
