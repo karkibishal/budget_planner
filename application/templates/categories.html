@@ -1,0 +1,6 @@
+{% extends 'layout.html' %}
+{% block body_content %}
+    {% for category in categories %}
+        {{ category.name }} &emsp; {{ category.created_at }}<br>
+    {% endfor %}
+{% endblock body_content %}

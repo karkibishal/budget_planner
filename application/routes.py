@@ -1,12 +1,17 @@
 from flask import render_template, url_for, redirect, request
 from application import app, db
-from application.models import Income
+from application.models import Income, Categories
 from application.forms import IncomeForm
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
     annual_salary = Income.query.all()
     return render_template('index.html', title="Budget Planner", annual_salary=annual_salary)
+
+@app.route('/categories', methods=['POST', 'GET'])
+def categories():
+    categories = Categories.query.all()
+    return render_template('categories.html', title="Categories", categories=categories)
 
 @app.route('/income', methods=['POST', 'GET'])
 def income():
