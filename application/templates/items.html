@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block body_content %}
+    <form action='' method='POST'>
+        {{ form.hidden_tag() }}
+        
+        {{ form.name.label }} {{ form.name }} <br>
+        {% if form.name.errors %}
+            {% for error in form.name.errors %}
+                {{ error }}<br>
+            {% endfor %}
+        {% endif %}
+
+        {{ form.amount.label }} {{ form.select }} {{ form.amount }} <br>
+        {% if form.amount.errors %}
+            {% for error in form.amount.errors %}
+                {{ error }}<br>
+            {% endfor %}
+        {% endif %}
+
+        {{ form.submit }}
+    </form>
+{% endblock body_content %}

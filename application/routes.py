@@ -1,7 +1,7 @@
 from flask import render_template, url_for, redirect, request
 from application import app, db
-from application.models import Income, Categories
-from application.forms import IncomeForm
+from application.models import Income, Categories, Items
+from application.forms import IncomeForm, ItemsForm
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -63,3 +63,23 @@ def income():
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('income.html', title="Add income details", form=form)
+
+@app.route('/items', methods=['POST', 'GET'])
+def items():
+    form = ItemsForm()
+    if form.validate_on_submit():
+        if form.select.data == "annual":
+            amount = form.amount.data / 12
+        elif form.select.data == "monthly":
+            amount = form.amount.data
+        elif form.select.data == "weekly":
+            amount = form.amount.data * 4.33
+
+        item = Items(
+                    name = form.name.data,
+                    amount = amount
+                    )
+        db.session.add(item)
+        db.commit()
+        return redirect(url_for('index'))
+    return render_template('items.html', title="Add expense items", form=form)

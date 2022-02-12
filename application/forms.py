@@ -42,3 +42,13 @@ class IncomeForm(FlaskForm):
     
     submit = SubmitField("Submit")
 
+class ItemsForm(FlaskForm):
+    select = SelectField(choices=[
+                            ("annual", "annual"),
+                            ("monthly", "monthly"),
+                            ("weekly", "weekly")
+                            ])
+    name = StringField("Item Description", validators = [InputRequired()])
+    amount = DecimalField("Amount (£)", validators = [InputRequired(), NumberRange(min=0)])
+
+    submit = SubmitField("Submit")
