@@ -6,9 +6,9 @@ class Categories(db.Model):
     name = db.Column(db.String(50), unique = True, nullable = False)
     created_at = db.Column(db.DateTime, nullable = False, default = date.today())
     updated_at = db.Column(db.DateTime, nullable = False, default = date.today())
-    items = db.relationship('Items', backref = 'category')
+    items = db.relationship('Expenses', backref = 'category')
 
-class Items(db.Model):
+class Expenses(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(50), nullable = False)
     amount = db.Column(db.Float, nullable = False)

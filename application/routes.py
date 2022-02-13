@@ -1,7 +1,7 @@
 from flask import render_template, url_for, redirect, request
 from application import app, db
-from application.models import Income, Categories, Items
-from application.forms import IncomeForm, ItemsForm
+from application.models import Income, Categories, Expenses
+from application.forms import IncomeForm, ExpensesForm
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
