@@ -64,22 +64,17 @@ def income():
         return redirect(url_for('index'))
     return render_template('income.html', title="Add income details", form=form)
 
-@app.route('/items', methods=['POST', 'GET'])
-def items():
-    form = ItemsForm()
+@app.route('/expenses', methods=['POST', 'GET'])
+def expenses():
+    form = ExpensesForm()
     if form.validate_on_submit():
-        if form.select.data == "annual":
-            amount = form.amount.data / 12
-        elif form.select.data == "monthly":
-            amount = form.amount.data
-        elif form.select.data == "weekly":
-            amount = form.amount.data * 4.33
-
-        item = Items(
+        
+        expense = Expenses(
                     name = form.name.data,
-                    amount = amount
+                    amount = form.amount.data,
+                    categories_id = Categories.query.filter_by(name=form.select_cat.data).first().id
                     )
-        db.session.add(item)
-        db.commit()
-        return redirect(url_for('index'))
-    return render_template('items.html', title="Add expense items", form=form)
+        db.session.add(expense)
+        db.session.commit()
+        return redirect(url_for('expenses'))
+    return render_template('expenses.html', title="Add expense items", form=form)

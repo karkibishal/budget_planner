@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, DateField, DecimalField
 from wtforms.validators import InputRequired, NumberRange, ValidationError
 
-from application.models import Income
+from application.models import Categories
 
 class IncomeForm(FlaskForm):
     select_salary = SelectField(choices=[
@@ -42,13 +42,14 @@ class IncomeForm(FlaskForm):
     
     submit = SubmitField("Submit")
 
+choices_cat = []
+for item in Categories.query.all():
+    choices_cat.append((item.name, item.name))
+
 class ExpensesForm(FlaskForm):
-    select = SelectField(choices=[
-                            ("annual", "annual"),
-                            ("monthly", "monthly"),
-                            ("weekly", "weekly")
-                            ])
+    
+    select_cat = SelectField("Category", choices=choices_cat)
     name = StringField("Expense Description", validators = [InputRequired()])
     amount = DecimalField("Amount (£)", validators = [InputRequired(), NumberRange(min=0)])
 
-    submit = SubmitField("Submit")
+    submit = SubmitField("Add")
