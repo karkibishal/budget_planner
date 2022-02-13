@@ -78,3 +78,18 @@ def expenses():
         db.session.commit()
         return redirect(url_for('expenses'))
     return render_template('expenses.html', title="Add expense items", form=form)
+
+@app.route('/add_expense', methods=['POST', 'GET'])
+def add_expense():
+    form = ExpensesForm()
+    if form.validate_on_submit():
+        
+        expense = Expenses(
+                    name = form.name.data,
+                    amount = form.amount.data,
+                    categories_id = Categories.query.filter_by(name=form.select_cat.data).first().id
+                    )
+        db.session.add(expense)
+        db.session.commit()
+        return redirect(url_for('expenses'))
+    return render_template('add_expense.html', title="Add expense items", form=form)
