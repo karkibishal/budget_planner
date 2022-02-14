@@ -102,8 +102,8 @@ def edit_expense(id):
         form = form
     return render_template('edit_expense.html', title='Edit expenses', form=form)
 
-@app.route('/delete/<int:id>')
-def delete(id):
+@app.route('/delete_expense/<int:id>')
+def delete_expense(id):
     expense = Expenses.query.get(id)
     db.session.delete(expense)
     db.session.commit()
