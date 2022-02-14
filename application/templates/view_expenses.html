@@ -1,5 +1,8 @@
-<div>
-<table class="table">
+{% extends 'layout.html' %}
+{% block body_content %}
+<div class="container"><br>
+  <div class="row align-items-center justify-content-center">
+<table id="all_expenses_table" class="table">
     <thead>
       <tr>
         {% for column in all_columns %}
@@ -18,23 +21,17 @@
             <td>{{ expense.categories_id }}</td>
         </tr>
       {% endfor %}
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
     </tbody>
   </table>
+  </div>
 </div>
+{% endblock body_content %}
+
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#all_expenses_table').DataTable();
+    });
+  </script>
+{% endblock %}
