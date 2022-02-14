@@ -80,12 +80,12 @@ def add_expense():
                     )
         db.session.add(expense)
         db.session.commit()
-        return redirect(url_for('add_expenses'))
+        return redirect(url_for('add_expense'))
     return render_template('add_expense.html', title="Add expense items", form=form)
 
 @app.route('/view_expenses', methods=['POST', 'GET'])
 def view_expenses():
-    all_expenses = Expenses.query.all()
+    all_expenses = Expenses.query.order_by(Expenses.updated_at.desc()).all()
     return render_template('view_expenses.html', title="Budget Planner", all_expenses=all_expenses)
 
 @app.route('/edit_expense/<int:id>', methods=['GET', 'POST'])
