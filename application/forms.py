@@ -52,4 +52,4 @@ class ExpensesForm(FlaskForm):
     name = StringField("Expense Description", validators = [InputRequired()])
     amount = DecimalField("Amount (£)", validators = [InputRequired(), NumberRange(min=0)])
 
-    submit = SubmitField("Add")
+    submit = SubmitField("Save")

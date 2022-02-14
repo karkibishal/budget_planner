@@ -86,5 +86,25 @@ def add_expense():
 @app.route('/view_expenses', methods=['POST', 'GET'])
 def view_expenses():
     all_expenses = Expenses.query.all()
-    all_columns = Expenses.__table__.columns.keys()
-    return render_template('view_expenses.html', title="Budget Planner", all_columns=all_columns, all_expenses=all_expenses)
+    return render_template('view_expenses.html', title="Budget Planner", all_expenses=all_expenses)
+
+@app.route('/edit_expense/<int:id>', methods=['GET', 'POST'])
+def edit_expense(id):
+    expense = Expenses.query.get(id)
+    form = ExpensesForm(name = expense.name, select_cat = expense.category.name, amount = expense.amount)
+    if form.validate_on_submit():
+        expense.name = form.name.data
+        expense.amount = form.amount.data
+        expense.categories_id = Categories.query.filter_by(name=form.select_cat.data).first().id
+        db.session.commit()
+        return redirect(url_for('view_expenses'))
+    elif request.method == 'GET':
+        form = form
+    return render_template('edit_expense.html', title='Edit expenses', form=form)
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    expense = Expenses.query.get(id)
+    db.session.delete(expense)
+    db.session.commit()
+    return redirect(url_for('view_expenses'))

@@ -5,20 +5,27 @@
 <table id="all_expenses_table" class="table">
     <thead>
       <tr>
-        {% for column in all_columns %}
-          <th scope="col">{{ column }}</th>
-        {% endfor %}
+          <th>NAME</th>
+          <th>AMOUNT</th>
+          <th>CREATED AT</th>
+          <th>UPDATED AT</th>
+          <th>CATEGORY</th>
+          <th>ACTION</th>
       </tr>
     </thead>
     <tbody>
       {% for expense in all_expenses %}
         <tr>
-            <th scope="row">{{ expense.id }}</th>
             <td>{{ expense.name }}</td>
             <td>{{ expense.amount }}</td>
             <td>{{ expense.created_at }}</td>
             <td>{{ expense.updated_at }}</td>
-            <td>{{ expense.categories_id }}</td>
+            <td>{{ expense.category.name }}</td>
+            <td><div class="d-grid gap-2 d-md-block">
+                <a type="button" class="btn btn-warning" href="{{ url_for("edit_expense", id=expense.id) }}">Edit</a>
+                <a type="button" class="btn btn-danger">Delete</a>
+                </div>
+            </td>
         </tr>
       {% endfor %}
     </tbody>
