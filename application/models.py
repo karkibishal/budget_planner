@@ -1,20 +1,24 @@
-from datetime import datetime
+from datetime import date
 from application import db
 
 class Categories(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(50), unique = True, nullable = False)
-    created_at = db.Column(db.DateTime, nullable = False, default = datetime.now)
-    updated_at = db.Column(db.DateTime, nullable = False, default = datetime.now, onupdate = datetime.now)
+    date = db.Column(db.DateTime, nullable = False, default = date.today)
     items = db.relationship('Expenses', backref = 'category')
 
 class Expenses(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(100), nullable = False)
     amount = db.Column(db.Float, nullable = False)
-    created_at = db.Column(db.DateTime, nullable = False, default = datetime.now)
-    updated_at = db.Column(db.DateTime, nullable = False, default = datetime.now, onupdate = datetime.now)
+    date = db.Column(db.DateTime, nullable = False, default = date.today)
     categories_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable = False)
+
+    def total_expense(expense_list):
+        total = 0
+        for expense in expense_list:
+            total += expense.amount
+        return total
 
 class Income(db.Model):
     id = db.Column(db.Integer, primary_key = True)

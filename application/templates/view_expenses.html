@@ -7,8 +7,7 @@
       <tr>
           <th>ITEM</th>
           <th>AMOUNT (£)</th>
-          <th>CREATED AT</th>
-          <th>UPDATED AT</th>
+          <th>DATE</th>
           <th>CATEGORY</th>
           <th>ACTION</th>
       </tr>
@@ -18,8 +17,7 @@
         <tr>
             <td>{{ expense.name }}</td>
             <td>{{ expense.amount }}</td>
-            <td>{{ expense.created_at.strftime("%d/%m/%Y, %H:%M") }}</td>
-            <td>{{ expense.updated_at.strftime("%d/%m/%Y, %H:%M") }}</td>
+            <td>{{ expense.date.strftime("%d/%m/%Y") }}</td>
             <td>{{ expense.category.name }}</td>
             <td><div class="d-grid gap-2 d-md-block">
                 <a type="button" class="btn btn-warning" href="{{ url_for("edit_expense", id=expense.id) }}">Edit</a>

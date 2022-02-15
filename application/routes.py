@@ -11,22 +11,27 @@ def index():
     cur_date = date.today()
     monday = cur_date - timedelta(days=cur_date.weekday())
     week_date = monday
-    weekdays = []
+    weekly_expense = []
 
     for i in range(7):
         if i == 0:
-            weekdays.append(week_date)
+            expense_per_day = Expenses.query.filter_by(date=week_date).all()
+            expense_per_day_total = Expenses.total_expense(expense_per_day)
+            weekly_expense.append(expense_per_day_total)
         else:
             week_date += timedelta(days=1)
-            weekdays.append(week_date)
-        
+            expense_per_day = Expenses.query.filter_by(date=week_date).all()
+            expense_per_day_total = Expenses.total_expense(expense_per_day)
+            weekly_expense.append(expense_per_day_total)
+            
+    print(week_date)    
     # expense category percentage in a month doughnut chart
 
 
     # total expense months comparison bar chart
 
-    annual_salary = Income.query.all()
-    return render_template('index.html', title="Budget Planner", annual_salary=annual_salary)
+    
+    return render_template('index.html', title="Budget Planner", weekly_expense=weekly_expense)
 
 
 @app.route('/categories', methods=['POST', 'GET'])
@@ -96,10 +101,10 @@ def expenses():
 def add_expense():
     form = ExpensesForm()
     if form.validate_on_submit():
-        
         expense = Expenses(
                     name = form.name.data,
                     amount = form.amount.data,
+                    date = form.date.data,
                     categories_id = Categories.query.filter_by(name=form.select_cat.data).first().id
                     )
         db.session.add(expense)
@@ -110,7 +115,7 @@ def add_expense():
 
 @app.route('/view_expenses', methods=['POST', 'GET'])
 def view_expenses():
-    all_expenses = Expenses.query.order_by(Expenses.updated_at.desc()).all()
+    all_expenses = Expenses.query.all()
     return render_template('view_expenses.html', title="Budget Planner", all_expenses=all_expenses)
 
 

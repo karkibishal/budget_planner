@@ -1,6 +1,9 @@
+from wsgiref.validate import validator
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, DateField, DecimalField
+from wtforms import StringField, SubmitField, SelectField, DecimalField
+from wtforms.fields import DateField
 from wtforms.validators import InputRequired, NumberRange, ValidationError
+from datetime import date
 
 from application.models import Categories
 
@@ -50,6 +53,7 @@ class ExpensesForm(FlaskForm):
     
     select_cat = SelectField("Category", choices=choices_cat)
     name = StringField("Expense Description", validators = [InputRequired()])
+    date = DateField("Date", default = date.today, validators = [InputRequired()])
     amount = DecimalField("Amount (£)", validators = [InputRequired(), NumberRange(min=0)])
 
     submit = SubmitField("Save")
