@@ -2,10 +2,17 @@
 
 {% block body_content %}
     <div class="container"><br>
-        <div class="row align-items-center justify-content-center">
-            <canvas id="lineChart"></canvas>
-            <canvas id="doughnutChart"></canvas>
-        </div>
+        <div class="row align-items-center justify-content-center mb-4">
+            <canvas id="lineChart" width="400" height="100"></canvas> 
+        </div><br>    
+            <div class="row align-items-center justify-content-center">
+                <div class="col mx-3">
+                    <canvas id="doughnutChart"></canvas><br>
+                </div>
+                <div class="col mx-3">
+                    <canvas id="barChart"></canvas>
+                </div>
+            </div>
     </div>    
 {% endblock body_content %}
 
@@ -32,22 +39,16 @@
         }]
         };
     
-        const config = {
-        type: 'line',
-        data: data,
-        options: {
-            scales: {x: {title: {display: true, text: 'Days', font: {size: 15}}},
-                    y: {title: {display: true, text: 'Expenses (£)', font: {size: 15}}}
-                    }
-                }
-        };
-    </script>
-
-    <script>
-        const lineChart = new Chart(
-          document.getElementById('lineChart'),
-          config
-        );
+        const config = {type: 'line',
+                        data: data,
+                        options: {
+                                scales: {x: {title: {display: true, text: 'Days', font: {size: 15}}},
+                                        y: {title: {display: true, text: 'Expenses (£)', font: {size: 15}}}
+                                        }
+                                }
+                        };
+    
+        const lineChart = new Chart(document.getElementById('lineChart'), config);
     </script>
 
     <script>
@@ -61,26 +62,65 @@
             label: 'My First Dataset',
             data: [300, 50, 100],
             backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)'
+                'rgb(249, 221, 171)',
+                'rgb(249, 167, 6)',
+                'rgb(255, 103, 4)',
+                'rgb(231, 6, 46)',
+                'rgb(162, 33, 126)',
+                'rgb(81, 18, 150)',
+                'rgb(2, 7, 89)',
+                'rgb(17, 79, 198)',
+                'rgb(3, 140, 94)',
+                'rgb(127, 194, 79)',
+                'rgb(241, 250, 238)',
+                'rgb(168, 218, 220)'
                 ],
             hoverOffset: 4
             }]
         };
-    </script>
-
-    <script>
+    
         const config_doughnut = {
         type: 'doughnut',
         data: doughnut_data,
         };
+    
+        const doughnutChart = new Chart(document.getElementById('doughnutChart'), config_doughnut);
     </script>
 
     <script>
-        const doughnutChart = new Chart(
-          document.getElementById('doughnutChart'),
-          config_doughnut
-        );
+        const bar_labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+        const bar_data = {
+        labels: bar_labels,
+        datasets: [{
+            axis: 'y',
+            label: 'My First Dataset',
+            data: [65, 59, 80, 81, 56, 55],
+            fill: true,
+            backgroundColor: [
+            'rgba(181, 82, 0, 0.5)',
+            'rgba(255, 147, 0, 0.5)',
+            'rgba(176, 235, 235, 0.5)',
+            'rgba(0, 191, 191, 0.5)',
+            'rgba(0, 120, 119, 0.5)',
+            'rgba(0, 66, 66, 0.5)',
+            'rgba(251, 160, 113, 0.5)',
+            'rgba(255, 227, 211, 0.5)',
+            'rgba(255, 176, 146, 0.5)',
+            'rgba(255, 138, 114, 0.5)',
+            'rgba(248, 255, 229, 0.5)',
+            'rgba(239, 71, 111, 0.5)'
+            ]
+            }]
+        };
+    
+        const config_bar = {type: 'bar', data: bar_data,
+                            options: {
+                                        indexAxis: 'y',
+                                    }
+        };
+   
+        const barChart = new Chart(document.getElementById('barChart'), config_bar);
+
     </script>
+
 {% endblock %}
