@@ -1,17 +1,39 @@
 from flask import render_template, url_for, redirect, request
 from application import app, db
+from datetime import timedelta, date
 from application.models import Income, Categories, Expenses
 from application.forms import IncomeForm, ExpensesForm
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
+
+    # expenses in the current week line chart
+    cur_date = date.today()
+    monday = cur_date - timedelta(days=cur_date.weekday())
+    week_date = monday
+    weekdays = []
+
+    for i in range(7):
+        if i == 0:
+            weekdays.append(week_date)
+        else:
+            week_date += timedelta(days=1)
+            weekdays.append(week_date)
+        
+    # expense category percentage in a month doughnut chart
+
+
+    # total expense months comparison bar chart
+
     annual_salary = Income.query.all()
     return render_template('index.html', title="Budget Planner", annual_salary=annual_salary)
+
 
 @app.route('/categories', methods=['POST', 'GET'])
 def categories():
     categories = Categories.query.all()
     return render_template('categories.html', title="Categories", categories=categories)
+
 
 @app.route('/income', methods=['POST', 'GET'])
 def income():
@@ -64,9 +86,11 @@ def income():
         return redirect(url_for('index'))
     return render_template('income.html', title="Add income details", form=form)
 
+
 @app.route('/expenses', methods=['POST', 'GET'])
 def expenses():
     return render_template('expenses.html')
+
 
 @app.route('/add_expense', methods=['POST', 'GET'])
 def add_expense():
@@ -83,10 +107,12 @@ def add_expense():
         return redirect(url_for('add_expense'))
     return render_template('add_expense.html', title="Add expense items", form=form)
 
+
 @app.route('/view_expenses', methods=['POST', 'GET'])
 def view_expenses():
     all_expenses = Expenses.query.order_by(Expenses.updated_at.desc()).all()
     return render_template('view_expenses.html', title="Budget Planner", all_expenses=all_expenses)
+
 
 @app.route('/edit_expense/<int:id>', methods=['GET', 'POST'])
 def edit_expense(id):
@@ -101,6 +127,7 @@ def edit_expense(id):
     elif request.method == 'GET':
         form = form
     return render_template('edit_expense.html', title='Edit expenses', form=form)
+
 
 @app.route('/delete_expense/<int:id>')
 def delete_expense(id):

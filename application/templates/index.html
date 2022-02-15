@@ -1,10 +1,86 @@
 {% extends 'layout.html' %}
+
 {% block body_content %}
-    {% for item in annual_salary %}
-        {{ item.salary }}<br>
-        {{ item.tax }}<br>
-        {{ item.ni }}<br>
-        {{ item.pension }}<br>
-        {{ item.student_loan }}
-    {% endfor %}
+    <div class="container"><br>
+        <div class="row align-items-center justify-content-center">
+            <canvas id="lineChart"></canvas>
+            <canvas id="doughnutChart"></canvas>
+        </div>
+    </div>    
 {% endblock body_content %}
+
+{% block scripts %}
+    <script>
+        const labels = [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+        ];
+    
+        const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Current week expenses',
+            backgroundColor: 'rgb(75, 192, 192)',
+            borderColor: 'rgb(75, 192, 192)',
+            data: [0, 10, 5, 0, 20, 30],
+            tension: 0.3
+        }]
+        };
+    
+        const config = {
+        type: 'line',
+        data: data,
+        options: {
+            scales: {x: {title: {display: true, text: 'Days', font: {size: 15}}},
+                    y: {title: {display: true, text: 'Expenses (£)', font: {size: 15}}}
+                    }
+                }
+        };
+    </script>
+
+    <script>
+        const lineChart = new Chart(
+          document.getElementById('lineChart'),
+          config
+        );
+    </script>
+
+    <script>
+        const doughnut_data = {
+        labels: [
+            'Red',
+            'Blue',
+            'Yellow'
+        ],
+        datasets: [{
+            label: 'My First Dataset',
+            data: [300, 50, 100],
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)'
+                ],
+            hoverOffset: 4
+            }]
+        };
+    </script>
+
+    <script>
+        const config_doughnut = {
+        type: 'doughnut',
+        data: doughnut_data,
+        };
+    </script>
+
+    <script>
+        const doughnutChart = new Chart(
+          document.getElementById('doughnutChart'),
+          config_doughnut
+        );
+    </script>
+{% endblock %}
