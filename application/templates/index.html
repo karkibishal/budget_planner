@@ -42,8 +42,21 @@
         const config = {type: 'line',
                         data: data,
                         options: {
-                                scales: {x: {title: {display: true, text: 'Days', font: {size: 15}}},
-                                        y: {title: {display: true, text: 'Expenses (£)', font: {size: 15}}}
+                                plugins: {
+                                            legend: {
+                                                    display: false
+                                                    },
+                                            title: {
+                                                    display: true,
+                                                    text: 'Expenses this week',
+                                                    position: 'bottom',
+                                                    font: {size: 20}
+                                                    }
+                                        },
+                                scales: {x: {title: {display: true, text: 'Days', font: {size: 15}},
+                                            grid: {display: false}},
+                                        y: {title: {display: true, text: 'Expenses (£)', font: {size: 15}},
+                                            grid: {display: false}}
                                         }
                                 }
                         };
@@ -91,6 +104,16 @@
         const config_doughnut = {
         type: 'doughnut',
         data: doughnut_data,
+        options: {
+                plugins: {
+                         title: {
+                                display: true,
+                                text: 'Categorical expense per month (%)',
+                                position: 'bottom',
+                                font: {size: 20}
+                                }
+                        },
+                }
         };
     
         const doughnutChart = new Chart(document.getElementById('doughnutChart'), config_doughnut);
@@ -126,9 +149,27 @@
     
         const config_bar = {type: 'bar', data: bar_data,
                             options: {
+                                        plugins: {
+                                                    legend: {
+                                                            display: false
+                                                            },
+                                                    title: {
+                                                            display: true,
+                                                            text: 'Monthly expense',
+                                                            position: 'bottom',
+                                                            font: {size: 20}
+                                                            }       
+                                                },
+                                        scales: {x: {title: {display: true, text: 'Expense (£)', font: {size: 15}},
+                                                    grid: {display: false}},
+                                                    
+                                                y: {title: {display: true, text: 'Months', font: {size: 15}},
+                                                    grid: {display: false}}
+                                                    
+                                                },
                                         indexAxis: 'y',
                                     }
-        };
+                            };
    
         const barChart = new Chart(document.getElementById('barChart'), config_bar);
 
