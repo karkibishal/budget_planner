@@ -122,11 +122,13 @@ def view_expenses():
 @app.route('/edit_expense/<int:id>', methods=['GET', 'POST'])
 def edit_expense(id):
     expense = Expenses.query.get(id)
-    form = ExpensesForm(name = expense.name, select_cat = expense.category.name, amount = expense.amount)
+    form = ExpensesForm(name = expense.name, select_cat = expense.category.name, 
+                        amount = expense.amount, date = expense.date)
     if form.validate_on_submit():
         expense.name = form.name.data
         expense.amount = form.amount.data
         expense.categories_id = Categories.query.filter_by(name=form.select_cat.data).first().id
+        expense.date = form.date.data
         db.session.commit()
         return redirect(url_for('view_expenses'))
     elif request.method == 'GET':

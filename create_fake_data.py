@@ -1,12 +1,12 @@
 import random
-from datetime import datetime
+from datetime import date
 from faker import Faker
 from application import db
 from application.models import Expenses
 
 
 
-
+"""
 def fake_data(n, datetime_start, datetime_end):
     faker = Faker()
     expense_items = ["rent", "concil tax", "electricity", "internet",
@@ -30,3 +30,11 @@ n = 50
 datetime_start = datetime(2021, 12, 1)
 datetime_end = datetime(2021, 12, 30)
 fake_data(n, datetime_start, datetime_end)
+
+"""
+today = date.today()
+first = Expenses.query.first()
+expense_per_day = Expenses.query.filter_by(name="rent").all()
+
+print(type(today))
+print(type(first.date.date()))

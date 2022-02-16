@@ -19,6 +19,10 @@
                 {{ form.amount.label(class="form-label") }}
                 {{ form.amount(class="form-control")}} 
             </div>
+            <div class="mb-3">
+                {{ form.date.label(class="form-label") }}
+                {{ form.date(class="form-control")}} 
+            </div>
                 {% if form.name.errors %}
                     {% for error in form.name.errors %}
                         <div>{{ error }}</div>
