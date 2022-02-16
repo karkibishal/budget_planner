@@ -16,16 +16,16 @@ def fake_data(n, datetime_start, datetime_end):
     for i in range(n):
         expense = Expenses(
                     name=faker.word(expense_items),
-                    amount=random.randint(20, 600),
+                    amount=random.randint(5, 50),
                     date=faker.date_between_dates(date_start=date_start, date_end=date_end),
                     categories_id=random.randint(1, 12))
         db.session.add(expense)
     db.session.commit()
     print(f'Added {n} fake data to the database.')
 
-n = 55
-date_start = date(2022, 2, 1)
-date_end = date(2022, 2, 27)
+n = 60
+date_start = date(2022, 6, 1)
+date_end = date(2022, 6, 28)
 fake_data(n, date_start, date_end)
 
 
