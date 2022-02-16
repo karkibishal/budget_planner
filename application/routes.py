@@ -23,15 +23,31 @@ def index():
             expense_per_day = Expenses.query.filter_by(date=week_date).all()
             expense_per_day_total = Expenses.total_expense(expense_per_day)
             weekly_expense.append(expense_per_day_total)
-            
-    print(week_date)    
+               
     # expense category percentage in a month doughnut chart
+    categorical_expense = []
+    month = date.today().month
+    year = date.today().year
+    first_date = date(year, month, 1)
+    last_date = date(year, month, 27)
+    delta = last_date - first_date
+
+    for j in range(12):
+        expense_per_category = 0
+        for i in range(delta.days + 1):
+            month_date = first_date + timedelta(days=i)
+            expense_per_day = Expenses.query.filter_by(date=month_date, categories_id=j+1).all()
+            expense_per_day_total = Expenses.total_expense(expense_per_day)
+            expense_per_category += expense_per_day_total
+        categorical_expense.append(expense_per_category)
+        
+         
 
 
     # total expense months comparison bar chart
 
     
-    return render_template('index.html', title="Budget Planner", weekly_expense=weekly_expense)
+    return render_template('index.html', title="Budget Planner", weekly_expense=weekly_expense, categorical_expense=categorical_expense)
 
 
 @app.route('/categories', methods=['POST', 'GET'])

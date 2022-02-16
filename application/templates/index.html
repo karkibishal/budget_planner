@@ -68,8 +68,8 @@
             'Miscellaneous'
         ],
         datasets: [{
-            label: 'My First Dataset',
-            data: [300, 50, 100, 60, 70, 45, 250, 60, 90, 44, 30, 12],
+            label: 'Monthly expense by categories',
+            data: {{ categorical_expense|tojson }},
             backgroundColor: [
                 'rgb(249, 221, 171)',
                 'rgb(249, 167, 6)',

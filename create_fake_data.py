@@ -5,8 +5,6 @@ from application import db
 from application.models import Expenses
 
 
-
-"""
 def fake_data(n, datetime_start, datetime_end):
     faker = Faker()
     expense_items = ["rent", "concil tax", "electricity", "internet",
@@ -19,22 +17,15 @@ def fake_data(n, datetime_start, datetime_end):
         expense = Expenses(
                     name=faker.word(expense_items),
                     amount=random.randint(20, 600),
-                    created_at=faker.date_time_between_dates(datetime_start=datetime_start, datetime_end=datetime_end),
-                    updated_at=faker.date_time_between_dates(datetime_start=datetime_start, datetime_end=datetime_end),
+                    date=faker.date_between_dates(date_start=date_start, date_end=date_end),
                     categories_id=random.randint(1, 12))
         db.session.add(expense)
     db.session.commit()
     print(f'Added {n} fake data to the database.')
 
-n = 50
-datetime_start = datetime(2021, 12, 1)
-datetime_end = datetime(2021, 12, 30)
-fake_data(n, datetime_start, datetime_end)
+n = 55
+date_start = date(2022, 2, 1)
+date_end = date(2022, 2, 27)
+fake_data(n, date_start, date_end)
 
-"""
-today = date.today()
-first = Expenses.query.first()
-expense_per_day = Expenses.query.filter_by(name="rent").all()
 
-print(type(today))
-print(type(first.date.date()))
