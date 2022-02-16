@@ -3,13 +3,15 @@
 {% block body_content %}
     <div class="container"><br>
         <div class="row align-items-center justify-content-center mb-4">
-            <canvas id="lineChart" width="400" height="100"></canvas> 
+            <div class="col-sm-6">
+                <canvas id="lineChart"></canvas> 
+            </div>
         </div><br>    
             <div class="row align-items-center justify-content-center">
-                <div class="col mx-3">
+                <div class="col-sm-4">
                     <canvas id="doughnutChart"></canvas><br>
                 </div>
-                <div class="col mx-3">
+                <div class="col-sm-6">
                     <canvas id="barChart"></canvas>
                 </div>
             </div>
@@ -31,7 +33,7 @@
         const data = {
         labels: labels,
         datasets: [{
-            label: 'Current week expenses',
+            label: 'Expense this week',
             backgroundColor: 'rgb(75, 192, 192)',
             borderColor: 'rgb(75, 192, 192)',
             data: {{ weekly_expense|tojson }},
@@ -48,7 +50,7 @@
                                                     },
                                             title: {
                                                     display: true,
-                                                    text: 'Expenses this week',
+                                                    text: 'Expense this week',
                                                     position: 'bottom',
                                                     font: {size: 20}
                                                     }
@@ -81,7 +83,7 @@
             'Miscellaneous'
         ],
         datasets: [{
-            label: 'Monthly expense by categories',
+            label: 'Categorical expense per month (%)',
             data: {{ categorical_expense|tojson }},
             backgroundColor: [
                 'rgb(249, 221, 171)',
@@ -127,7 +129,7 @@
         labels: bar_labels,
         datasets: [{
             axis: 'y',
-            label: 'My First Dataset',
+            label: 'Monthly expense',
             data: {{ monthly_expense|tojson }},
             fill: true,
             backgroundColor: [
