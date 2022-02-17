@@ -1,5 +1,6 @@
 from application import app, db
 from datetime import timedelta, date
+from calendar import monthrange
 from application.models import Income, Categories, Expenses
 
 def weeklyExpense():
@@ -27,7 +28,7 @@ def categoricalExpense():
     month = date.today().month
     year = date.today().year
     first_date = date(year, month, 1)
-    last_date = date(year, month, 27)
+    last_date = date(year, month, monthrange(year, month)[1])
     delta = last_date - first_date
 
     for j in range(12):
