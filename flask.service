@@ -6,7 +6,7 @@ After=network.target
 User=jenkins
 WorkingDirectory=/home/jenkins/.jenkins/workspace/flaskapp2
 Environment=SQLALCHEMY_DATABASE_URI=DB_URI
-Environment=SECRET_KEY=SECRET_KEY
+Environment=SECRET_KEY=SECRET
 ExecStart=python3 /home/jenkins/.jenkins/workspace/flaskapp2/app.py
 Restart=always
 
