@@ -6,7 +6,6 @@ After=network.target
 User=jenkins
 WorkingDirectory=/home/jenkins/.jenkins/workspace/flaskapp2
 ExecStart=python3 /home/jenkins/.jenkins/workspace/flaskapp2/app.py
-Restart=always
 
 [Install]
 WantedBy=multi-user.target
