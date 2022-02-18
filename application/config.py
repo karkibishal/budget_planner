@@ -3,7 +3,7 @@ import os
 FLASK_ENV = 'development'
 DEBUG = True
 TESTING = True
-SECRET_KEY = 'HGg$MRNL6KT9GnkQ7CDRf&D$zfG@AJ'
+#SECRET_KEY = 'HGg$MRNL6KT9GnkQ7CDRf&D$zfG@AJ'
 
-SQLALCHEMY_DATABASE_URI = "sqlite:///data.db"
+#SQLALCHEMY_DATABASE_URI = "sqlite:///data.db"
 SQLALCHEMY_TRACK_MODIFICATIONS = False
