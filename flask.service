@@ -1,0 +1,11 @@
+[Unit]
+Description=Flask app
+After=network.target
+
+[Service]
+User=jenkins
+WorkingDirectory=/home/jenkins/.jenkins/workspace/flaskapp2
+ExecStart=python3 /home/jenkins/.jenkins/workspace/flaskapp2/app.py
+
+[Install]
+WantedBy=multi-user.target
