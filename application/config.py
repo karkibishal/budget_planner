@@ -3,6 +3,6 @@ import os
 FLASK_ENV = 'development'
 DEBUG = True
 TESTING = True
-SECRET_KEY = os.getenv(SECRET_KEY)
-SQLALCHEMY_DATABASE_URI = os.getenv(DB_URI)
+SECRET_KEY = os.getenv('SECRET')
+SQLALCHEMY_DATABASE_URI = os.getenv('DB_URI')
 SQLALCHEMY_TRACK_MODIFICATIONS = False
