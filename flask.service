@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 User=jenkins
-Environment=DATABASE_URI=${DB_URI}
+Environment=SQLALCHEMY_DATABASE_URI=${DB_URI}
 Environment=SECRET_KEY=${SECRET_KEY}
 WorkingDirectory=/home/jenkins/.jenkins/workspace/flaskapp2
 ExecStart=python3 /home/jenkins/.jenkins/workspace/flaskapp2/app.py
