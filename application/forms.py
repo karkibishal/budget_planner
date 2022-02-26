@@ -45,6 +45,13 @@ class IncomeForm(FlaskForm):
     
     submit = SubmitField("Submit")
 
+class CategoriesForm(FlaskForm):
+    
+    name = StringField("Category", validators = [InputRequired()])
+    date = DateField("Date", default = date.today, validators = [InputRequired()])
+    
+    submit = SubmitField("Save")
+
 choices_cat = []
 for item in Categories.query.all():
     choices_cat.append((item.name, item.name))

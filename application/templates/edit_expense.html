@@ -4,23 +4,24 @@
 <div class="container"><br>
     <div class="row align-items-center justify-content-center">
     <div class="col-md-4">
+        <h2><strong>{{ title }}</strong></h2><br>
         <form action='' method='POST'>
             {{ form.hidden_tag() }}
     
             <div class="mb-3">
-                {{ form.name.label(class="form-label") }}
+                <strong>{{ form.name.label(class="form-label") }}</strong>
                 {{ form.name(class="form-control")}}
             </div>
             <div class="mb-3">
-                {{ form.select_cat.label(class="form-label") }}
+                <strong>{{ form.select_cat.label(class="form-label") }}</strong>
                 {{ form.select_cat(class="form-control")}}
             </div>
             <div class="mb-3">
-                {{ form.amount.label(class="form-label") }}
+                <strong>{{ form.amount.label(class="form-label") }}</strong>
                 {{ form.amount(class="form-control")}} 
             </div>
             <div class="mb-3">
-                {{ form.date.label(class="form-label") }}
+                <strong>{{ form.date.label(class="form-label") }}</strong>
                 {{ form.date(class="form-control")}} 
             </div>
                 {% if form.name.errors %}

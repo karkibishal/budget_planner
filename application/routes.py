@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, request
 from application import app, db
 from datetime import timedelta, date
 from application.models import Income, Categories, Expenses
-from application.forms import IncomeForm, ExpensesForm
+from application.forms import IncomeForm, ExpensesForm, CategoriesForm
 from application.chart_func import weeklyExpense, categoricalExpense, monthlyExpense
 
 @app.route('/', methods=['POST', 'GET'])
@@ -17,14 +17,9 @@ def index():
     # total expense months comparison bar chart
     monthly_expense = monthlyExpense()
     
-    return render_template('index.html', title="Budget Planner", weekly_expense=weekly_expense, 
+    return render_template('index.html', title="Budget Planner Dashboard", weekly_expense=weekly_expense, 
                             categorical_expense=categorical_expense, monthly_expense=monthly_expense)
 
-
-@app.route('/categories', methods=['POST', 'GET'])
-def categories():
-    categories = Categories.query.all()
-    return render_template('categories.html', title="Categories", categories=categories)
 
 
 @app.route('/income', methods=['POST', 'GET'])
@@ -79,9 +74,43 @@ def income():
     return render_template('income.html', title="Add income details", form=form)
 
 
-@app.route('/expenses', methods=['POST', 'GET'])
-def expenses():
-    return render_template('expenses.html')
+@app.route('/add_category', methods=['POST', 'GET'])
+def add_category():
+    form = CategoriesForm()
+    if form.validate_on_submit():
+        category = Categories(
+                    name = form.name.data,
+                    date = form.date.data,
+                    )
+        db.session.add(category)
+        db.session.commit()
+        return redirect(url_for('add_category'))
+    return render_template('add_category.html', title="Add expense categories", form=form)
+
+@app.route('/view_category', methods=['POST', 'GET'])
+def view_category():
+    all_categories = Categories.query.all()
+    return render_template('view_category.html', title="View categories", all_categories=all_categories)
+
+@app.route('/edit_category/<int:id>', methods=['GET', 'POST'])
+def edit_category(id):
+    category = Categories.query.get(id)
+    form = CategoriesForm(name = category.name, date = category.date)
+    if form.validate_on_submit():
+        category.name = form.name.data
+        category.date = form.date.data
+        db.session.commit()
+        return redirect(url_for('view_category'))
+    elif request.method == 'GET':
+        form = form
+    return render_template('edit_category.html', title='Edit expense categories', form=form)
+
+@app.route('/delete_category/<int:id>')
+def delete_category(id):
+    category = Categories.query.get(id)
+    db.session.delete(category)
+    db.session.commit()
+    return redirect(url_for('view_category'))
 
 
 @app.route('/add_expense', methods=['POST', 'GET'])
@@ -103,7 +132,7 @@ def add_expense():
 @app.route('/view_expenses', methods=['POST', 'GET'])
 def view_expenses():
     all_expenses = Expenses.query.all()
-    return render_template('view_expenses.html', title="Budget Planner", all_expenses=all_expenses)
+    return render_template('view_expenses.html', title="View expenses", all_expenses=all_expenses)
 
 
 @app.route('/edit_expense/<int:id>', methods=['GET', 'POST'])
@@ -120,7 +149,7 @@ def edit_expense(id):
         return redirect(url_for('view_expenses'))
     elif request.method == 'GET':
         form = form
-    return render_template('edit_expense.html', title='Edit expenses', form=form)
+    return render_template('edit_expense.html', title='Edit expense items', form=form)
 
 
 @app.route('/delete_expense/<int:id>')

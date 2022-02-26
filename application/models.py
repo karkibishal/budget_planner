@@ -4,7 +4,7 @@ from application import db
 class Categories(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(50), unique = True, nullable = False)
-    date = db.Column(db.DateTime, nullable = False, default = date.today)
+    date = db.Column(db.Date, nullable = False, default = date.today)
     items = db.relationship('Expenses', backref = 'category')
 
 class Expenses(db.Model):
