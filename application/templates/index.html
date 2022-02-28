@@ -37,8 +37,11 @@
         labels: labels,
         datasets: [{
             label: 'Expense this week',
-            backgroundColor: 'rgb(75, 192, 192)',
+            fill: true,
+            backgroundColor: 'rgba(75, 192, 192, 0.3)',
             borderColor: 'rgb(75, 192, 192)',
+            pointBackgroundColor: 'rgb(75, 192, 192)',
+            pointBorderColor: 'rgb(255, 255, 255)',
             data: {{ weekly_expense|tojson }},
             tension: 0.3
         }]
