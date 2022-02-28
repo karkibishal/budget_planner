@@ -4,7 +4,9 @@
 <div class="container"><br>
     <div class="row align-items-center justify-content-center">
     <div class="col-md-4">
-        <h3><strong>{{ title }}</strong></h3><br>
+        <div class="p-3 mb-5 text-light text-center" style="background-color: #36454F;">
+            <h3><strong>{{ title }}</strong></h3>
+        </div>
         <form action='' method='POST'>
             {{ form.hidden_tag() }}
     
@@ -29,3 +31,12 @@
 </div>
 
 {% endblock body_content %}
+
+{% block scripts %} 
+<script>
+  $(document).ready(function(){
+      $('.active').removeClass("active");
+      $("#link-category").addClass("active");
+  });
+</script>
+{% endblock %}

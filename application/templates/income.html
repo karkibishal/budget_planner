@@ -89,3 +89,12 @@
 </div>
 </div>
 {% endblock body_content %}
+
+{% block scripts %}
+<script>
+  $(document).ready(function(){
+      $('.active').removeClass("active");
+      $("#link-income").addClass("active");
+  })
+</script>
+{% endblock %}

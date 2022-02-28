@@ -4,7 +4,9 @@
     <div class="container"><br>
         <div class="row align-items-center justify-content-center mb-4">
             <div class="col-sm-6">
-                <h2><strong>{{ title }}</strong></h2><br><br><br>
+                <div class="p-3 mb-5 text-light text-center" style="background-color: #36454F;">
+                    <h2><strong>{{ title }}</strong></h2>
+                </div>
                 <canvas id="lineChart"></canvas> 
             </div>
         </div><br>    
@@ -177,5 +179,13 @@
         const barChart = new Chart(document.getElementById('barChart'), config_bar);
 
     </script>
+
+
+<script>
+  $(document).ready(function(){
+      $('.active').removeClass("active");
+      $("#link-home").addClass("active");
+  });
+</script>
 
 {% endblock %}
