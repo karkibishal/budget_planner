@@ -2,53 +2,57 @@
 {% block body_content %}
 <div class="container"><br>
   <div class="row align-items-center justify-content-center">
-<table id="all_expenses_table" class="table">
-    <thead>
-      <tr>
-          <th>ITEM</th>
-          <th>AMOUNT (£)</th>
-          <th>DATE</th>
-          <th>CATEGORY</th>
-          <th>ACTION</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for expense in all_expenses %}
-        <tr>
-            <td>{{ expense.name }}</td>
-            <td>{{ expense.amount }}</td>
-            <td>{{ expense.date.strftime("%d/%m/%Y") }}</td>
-            <td>{{ expense.category.name }}</td>
-            <td><div class="d-grid gap-2 d-md-block">
-                <a type="button" class="btn btn-warning" href="{{ url_for("edit_expense", id=expense.id) }}">Edit</a>
-                <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
-                </div>
-                <!-- Modal -->
-                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete?</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        Item: {{ expense.name }}<br>
-                        Amount(£): {{ expense.amount }}<br>
-                        Category: {{ expense.category.name }}<br>
-                        Date: {{ expense.date }}<br>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                        <a type="button" class="btn btn-primary" href="{{ url_for("delete_expense", id=expense.id) }}">Yes</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+    <div class="card shadow bg-light">
+      <div class="card-body">
+        <table id="all_expenses_table" class="table">
+            <thead>
+              <tr>
+                  <th>ITEM</th>
+                  <th>AMOUNT (£)</th>
+                  <th>DATE</th>
+                  <th>CATEGORY</th>
+                  <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for expense in all_expenses %}
+                <tr>
+                    <td>{{ expense.name }}</td>
+                    <td>{{ expense.amount }}</td>
+                    <td>{{ expense.date.strftime("%d/%m/%Y") }}</td>
+                    <td>{{ expense.category.name }}</td>
+                    <td><div class="d-grid gap-2 d-md-block">
+                        <a type="button" class="btn btn-warning" href="{{ url_for("edit_expense", id=expense.id) }}">Edit</a>
+                        <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                Item: {{ expense.name }}<br>
+                                Amount(£): {{ expense.amount }}<br>
+                                Category: {{ expense.category.name }}<br>
+                                Date: {{ expense.date }}<br>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                <a type="button" class="btn btn-primary" href="{{ url_for("delete_expense", id=expense.id) }}">Yes</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>    
   </div>
 </div>
 {% endblock body_content %}

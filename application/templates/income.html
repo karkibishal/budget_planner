@@ -1,92 +1,99 @@
 {% extends 'layout.html' %}
 {% block body_content %}
 <div class="container"><br>
-<div class="row align-items-center justify-content-center">
-<div class="col-md-4">
-    <form action='' method='POST'>
-        {{ form.hidden_tag() }}
+    <div class="row align-items-center justify-content-center">
+        <div class="col-md-4">
+            <div class="p-3 mb-5 text-light text-center rounded shadow" style="background-color: #36454F;">
+                <h3><strong>{{ title }}</strong></h3>
+            </div>
+            <div class="card shadow bg-light">
+                <div class="card-body">
+                    <form action='' method='POST'>
+                        {{ form.hidden_tag() }}
 
-        <div class="row">
-            {{ form.salary.label(class="form-label") }}
-            <div class="col">
-                
-                {{ form.salary(class="form-control")}}
-            </div>
-            <div class="col">
-                {{ form.select_salary(class="form-select") }}
-            </div>
-        </div><br>
-            {% if form.salary.errors %}
-                {% for error in form.salary.errors %}
-                    <div>{{ error }}</div>
-                {% endfor %}
-            {% endif %}
-        
-        <div class="row">
-            {{ form.tax.label(class="form-label") }}
-            <div class="col">
-                   {{ form.tax(class="form-control")}}
-            </div>
-            <div class="col">
-                {{ form.select_tax(class="form-select") }}
-            </div>
-        </div><br>
-            {% if form.tax.errors %}
-               {% for error in form.tax.errors %}
-                    <div>{{ error }}</div>
-                {% endfor %}
-            {% endif %}
-         
+                        <div class="row">
+                            {{ form.salary.label(class="form-label") }}
+                            <div class="col">
+                                
+                                {{ form.salary(class="form-control")}}
+                            </div>
+                            <div class="col">
+                                {{ form.select_salary(class="form-select") }}
+                            </div>
+                        </div><br>
+                            {% if form.salary.errors %}
+                                {% for error in form.salary.errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        
+                        <div class="row">
+                            {{ form.tax.label(class="form-label") }}
+                            <div class="col">
+                                {{ form.tax(class="form-control")}}
+                            </div>
+                            <div class="col">
+                                {{ form.select_tax(class="form-select") }}
+                            </div>
+                        </div><br>
+                            {% if form.tax.errors %}
+                            {% for error in form.tax.errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        
 
-        <div class="row">
-            {{ form.ni.label(class="form-label") }}
-            <div class="col">
-                {{ form.ni(class="form-control")}}
-            </div>
-            <div class="col">
-                {{ form.select_ni(class="form-select") }}
-            </div>
-        </div><br>
-            {% if form.ni.errors %}
-                {% for error in form.ni.errors %}
-                    <div>{{ error }}</div>
-                {% endfor %}
-            {% endif %}
-        
-        <div class="row">
-            {{ form.pension.label(class="form-label") }}
-            <div class="col">
-                {{ form.pension(class="form-control")}}
-            </div>
-            <div class="col">
-                {{ form.select_pension(class="form-select") }}
-            </div>
-        </div><br>
-            {% if form.pension.errors %}
-                {% for error in form.pension.errors %}
-                    <div>{{ error }}</div>
-                {% endfor %}
-            {% endif %}
+                        <div class="row">
+                            {{ form.ni.label(class="form-label") }}
+                            <div class="col">
+                                {{ form.ni(class="form-control")}}
+                            </div>
+                            <div class="col">
+                                {{ form.select_ni(class="form-select") }}
+                            </div>
+                        </div><br>
+                            {% if form.ni.errors %}
+                                {% for error in form.ni.errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        
+                        <div class="row">
+                            {{ form.pension.label(class="form-label") }}
+                            <div class="col">
+                                {{ form.pension(class="form-control")}}
+                            </div>
+                            <div class="col">
+                                {{ form.select_pension(class="form-select") }}
+                            </div>
+                        </div><br>
+                            {% if form.pension.errors %}
+                                {% for error in form.pension.errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
 
-        <div class="row">
-            {{ form.student_loan.label(class="form-label") }}
-            <div class="col">
-                {{ form.student_loan(class="form-control")}}
-            </div>
-            <div class="col">
-                {{ form.select_student_loan(class="form-select") }}
-            </div>
-        </div><br>
-            {% if form.student_loan.errors %}
-                {% for error in form.student_loan.errors %}
-                    <div>{{ error }}</div>
-                {% endfor %}
-            {% endif %}
+                        <div class="row">
+                            {{ form.student_loan.label(class="form-label") }}
+                            <div class="col">
+                                {{ form.student_loan(class="form-control")}}
+                            </div>
+                            <div class="col">
+                                {{ form.select_student_loan(class="form-select") }}
+                            </div>
+                        </div><br>
+                            {% if form.student_loan.errors %}
+                                {% for error in form.student_loan.errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
 
-        {{ form.submit(class="btn btn-primary") }}
-    </form>
-</div>
-</div>
+                        {{ form.submit(class="btn btn-primary") }}
+                    </form>
+                </div>
+            </div>        
+        </div>
+    </div>
 </div>
 {% endblock body_content %}
 

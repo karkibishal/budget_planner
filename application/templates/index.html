@@ -4,18 +4,39 @@
     <div class="container"><br>
         <div class="row align-items-center justify-content-center mb-4">
             <div class="col-sm-6">
-                <div class="p-3 mb-5 text-light text-center" style="background-color: #36454F;">
+                <div class="p-3 mb-5 text-light text-center rounded shadow-lg" style="background-color: #36454F;">
                     <h2><strong>{{ title }}</strong></h2>
                 </div>
-                <canvas id="lineChart"></canvas> 
+                <div class="card shadow bg-light text-center">
+                    <h6 class="card-header text-white" style="background-color: #36454F;">
+                        <strong>Expense this week</strong>
+                    </h6>
+                    <div class="card-body">
+                        <canvas id="lineChart"></canvas> 
+                    </div>
+                </div>
             </div>
         </div><br>    
             <div class="row align-items-center justify-content-center">
                 <div class="col-sm-4">
-                    <canvas id="doughnutChart"></canvas><br>
+                    <div class="card shadow bg-light text-center">
+                        <h6 class="card-header text-white" style="background-color: #36454F;">
+                            <strong>Categorical expense per month (%)</strong>
+                        </h6>
+                        <div class="card-body">
+                            <canvas id="doughnutChart"></canvas><br>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-7">
-                    <canvas id="barChart"></canvas>
+                    <div class="card shadow bg-light text-center">
+                        <h6 class="card-header text-white" style="background-color: #36454F;">
+                            <strong>Monthly expense</strong>
+                        </h6>
+                        <div class="card-body">
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
     </div>    
@@ -36,12 +57,11 @@
         const data = {
         labels: labels,
         datasets: [{
-            label: 'Expense this week',
             fill: true,
             backgroundColor: 'rgba(75, 192, 192, 0.3)',
             borderColor: 'rgb(75, 192, 192)',
-            pointBackgroundColor: 'rgb(75, 192, 192)',
-            pointBorderColor: 'rgb(255, 255, 255)',
+            pointBackgroundColor: 'rgb(255, 255, 255)',
+            pointBorderColor: 'rgb(75, 192, 192)',
             data: {{ weekly_expense|tojson }},
             tension: 0.3
         }]
@@ -55,7 +75,7 @@
                                                     display: false
                                                     },
                                             title: {
-                                                    display: true,
+                                                    display: false,
                                                     text: 'Expense this week',
                                                     position: 'bottom',
                                                     font: {size: 20}
@@ -123,7 +143,7 @@
                                         }
                                 },                        
                          title: {
-                                display: true,
+                                display: false,
                                 text: 'Categorical expense per month (%)',
                                 position: 'bottom',
                                 font: {size: 20}
@@ -173,7 +193,7 @@
                                                             display: false
                                                             },
                                                     title: {
-                                                            display: true,
+                                                            display: false,
                                                             text: 'Monthly expense',
                                                             position: 'bottom',
                                                             font: {size: 20}

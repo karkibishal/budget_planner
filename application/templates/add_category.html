@@ -3,31 +3,35 @@
 
 <div class="container"><br>
     <div class="row align-items-center justify-content-center">
-    <div class="col-md-4">
-        <div class="p-3 mb-5 text-light text-center" style="background-color: #36454F;">
-            <h3><strong>{{ title }}</strong></h3>
-        </div>
-        <form action='' method='POST'>
-            {{ form.hidden_tag() }}
-    
-            <div class="mb-3">
-                <strong>{{ form.name.label(class="form-label") }}</strong>
-                {{ form.name(class="form-control")}}
+        <div class="col-md-4">
+            <div class="p-3 mb-5 text-light text-center rounded shadow" style="background-color: #36454F;">
+                <h4><strong>{{ title }}</strong></h4>
             </div>
+            <div class="card shadow bg-light">
+                <div class="card-body">
+                    <form action='' method='POST'>
+                        {{ form.hidden_tag() }}
+                
+                        <div class="mb-3">
+                            <strong>{{ form.name.label(class="form-label") }}</strong>
+                            {{ form.name(class="form-control")}}
+                        </div>
 
-            <div class="mb-3">
-                <strong>{{ form.date.label(class="form-label") }}</strong>
-                {{ form.date(class="form-control")}} 
-            </div>
-                {% if form.name.errors %}
-                    {% for error in form.name.errors %}
-                        <div>{{ error }}</div>
-                    {% endfor %}
-                {% endif %}
-    
-            {{ form.submit(class="btn btn-primary") }}
-        </form>
-    </div>
+                        <div class="mb-3">
+                            <strong>{{ form.date.label(class="form-label") }}</strong>
+                            {{ form.date(class="form-control")}} 
+                        </div>
+                            {% if form.name.errors %}
+                                {% for error in form.name.errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
+                
+                        {{ form.submit(class="btn btn-primary") }}
+                    </form>
+                </div>
+            </div>    
+        </div>
     </div>
 </div>
 
