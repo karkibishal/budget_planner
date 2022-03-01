@@ -3,7 +3,7 @@
 <div class="container"><br>
     <div class="row align-items-center justify-content-center">
         <div class="col-md-4">
-            <div class="p-3 mb-5 text-light text-center rounded shadow" style="background-color: #36454F;">
+            <div class="p-3 mb-5 text-light text-center rounded shadow border border-light" style="background-color: #36454F;">
                 <h3><strong>{{ title }}</strong></h3>
             </div>
             <div class="card shadow bg-light">
@@ -12,7 +12,7 @@
                         {{ form.hidden_tag() }}
 
                         <div class="row">
-                            {{ form.salary.label(class="form-label") }}
+                            <strong>{{ form.salary.label(class="form-label") }}</strong>
                             <div class="col">
                                 
                                 {{ form.salary(class="form-control")}}
@@ -28,7 +28,7 @@
                             {% endif %}
                         
                         <div class="row">
-                            {{ form.tax.label(class="form-label") }}
+                            <strong>{{ form.tax.label(class="form-label") }}</strong>
                             <div class="col">
                                 {{ form.tax(class="form-control")}}
                             </div>
@@ -44,7 +44,7 @@
                         
 
                         <div class="row">
-                            {{ form.ni.label(class="form-label") }}
+                            <strong>{{ form.ni.label(class="form-label") }}</strong>
                             <div class="col">
                                 {{ form.ni(class="form-control")}}
                             </div>
@@ -59,7 +59,7 @@
                             {% endif %}
                         
                         <div class="row">
-                            {{ form.pension.label(class="form-label") }}
+                            <strong>{{ form.pension.label(class="form-label") }}</strong>
                             <div class="col">
                                 {{ form.pension(class="form-control")}}
                             </div>
@@ -74,7 +74,7 @@
                             {% endif %}
 
                         <div class="row">
-                            {{ form.student_loan.label(class="form-label") }}
+                            <strong>{{ form.student_loan.label(class="form-label") }}</strong>
                             <div class="col">
                                 {{ form.student_loan(class="form-control")}}
                             </div>

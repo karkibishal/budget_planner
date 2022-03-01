@@ -4,10 +4,10 @@
     <div class="container"><br>
         <div class="row align-items-center justify-content-center mb-4">
             <div class="col-sm-6">
-                <div class="p-3 mb-5 text-light text-center rounded shadow-lg" style="background-color: #36454F;">
+                <div class="p-3 mb-5 text-light text-center rounded shadow-lg border border-light" style="background-color: #36454F;">
                     <h2><strong>{{ title }}</strong></h2>
                 </div>
-                <div class="card shadow bg-light text-center">
+                <div class="card shadow-lg bg-light text-center border border-light">
                     <h6 class="card-header text-white" style="background-color: #36454F;">
                         <strong>Expense this week</strong>
                     </h6>
@@ -19,7 +19,7 @@
         </div><br>    
             <div class="row align-items-center justify-content-center">
                 <div class="col-sm-4">
-                    <div class="card shadow bg-light text-center">
+                    <div class="card shadow-lg bg-light text-center border border-light">
                         <h6 class="card-header text-white" style="background-color: #36454F;">
                             <strong>Categorical expense per month (%)</strong>
                         </h6>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="col-sm-7">
-                    <div class="card shadow bg-light text-center">
+                    <div class="card shadow-lg bg-light text-center border border-light">
                         <h6 class="card-header text-white" style="background-color: #36454F;">
                             <strong>Monthly expense</strong>
                         </h6>
@@ -60,6 +60,7 @@
             fill: true,
             backgroundColor: 'rgba(75, 192, 192, 0.3)',
             borderColor: 'rgb(75, 192, 192)',
+            borderWidth: 2,
             pointBackgroundColor: 'rgb(255, 255, 255)',
             pointBorderColor: 'rgb(75, 192, 192)',
             data: {{ weekly_expense|tojson }},
@@ -81,9 +82,9 @@
                                                     font: {size: 20}
                                                     }
                                         },
-                                scales: {x: {title: {display: true, text: 'Days', font: {size: 15}},
+                                scales: {x: {title: {display: true, text: 'Days', font: {size: 15, weight: "bold"}},
                                             grid: {display: false}},
-                                        y: {title: {display: true, text: 'Expenses (£)', font: {size: 15}},
+                                        y: {title: {display: true, text: 'Expenses (£)', font: {size: 15, weight: "bold"}},
                                             grid: {display: false}}
                                         }
                                 }
@@ -199,10 +200,10 @@
                                                             font: {size: 20}
                                                             }       
                                                 },
-                                        scales: {x: {title: {display: true, text: 'Expense (£)', font: {size: 15}},
+                                        scales: {x: {title: {display: true, text: 'Expense (£)', font: {size: 15, weight: "bold"}},
                                                     grid: {display: false}},
                                                     
-                                                y: {title: {display: true, text: 'Months', font: {size: 15}},
+                                                y: {title: {display: true, text: 'Months', font: {size: 15, weight: "bold"}},
                                                     grid: {display: false}}
                                                     
                                                 },
