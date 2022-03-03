@@ -76,7 +76,7 @@
                         <div class="row">
                             <strong>{{ form.student_loan.label(class="form-label") }}</strong>
                             <div class="col">
-                                {{ form.student_loan(class="form-control")}}
+                                {{ form.student_loan(class="form-control") }}
                             </div>
                             <div class="col">
                                 {{ form.select_student_loan(class="form-select") }}
@@ -87,7 +87,7 @@
                                     <div>{{ error }}</div>
                                 {% endfor %}
                             {% endif %}
-
+                                               
                         {{ form.submit(class="btn btn-primary") }}
                     </form>
                 </div>
@@ -95,6 +95,18 @@
         </div>
     </div>
 </div>
+
+<div class="container"><br>
+    <div class="row align-items-center justify-content-center">
+        <div class="col-md-4">
+            <div class="card shadow bg-light" id="corners-all">
+                <div class="card-body">
+                    Your monthly take home pay is <strong>£{{ monthly_pay|round(2) }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
 {% endblock body_content %}
 
 {% block scripts %}
@@ -104,4 +116,5 @@
       $("#link-income").addClass("active");
   })
 </script>
+
 {% endblock %}

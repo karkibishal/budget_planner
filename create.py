@@ -4,6 +4,7 @@ from application.models import Categories
 db.drop_all()
 db.create_all()
 
+"""
 category_objects = [
         Categories(name = "Household"),
         Categories(name = "Utilities"),
@@ -21,3 +22,4 @@ category_objects = [
 
 db.session.add_all(category_objects)
 db.session.commit()
+"""

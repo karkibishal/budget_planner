@@ -95,25 +95,12 @@
 
     <script>
         const doughnut_data = {
-        labels: [
-            'Household',
-            'Utilities',
-            'Food',
-            'Repayments',
-            'Transport',
-            'Subscriptions',
-            'Family',
-            'Entertainment',
-            'Health',
-            'Clothes',
-            'Holiday/One off',
-            'Miscellaneous'
-        ],
+        labels: {{ category_names|tojson }},
         datasets: [{
             label: 'Categorical expense per month (%)',
             data: {{ categorical_expense|tojson }},
             borderColor: 'rgb(105, 105, 105)',
-            spacing: 15,
+            spacing: 0,
             backgroundColor: [
                 'rgb(249, 221, 171)',
                 'rgb(249, 167, 6)',

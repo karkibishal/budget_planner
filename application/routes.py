@@ -12,12 +12,12 @@ def index():
     weekly_expense =  weeklyExpense()          
 
     # expense category percentage in a month doughnut chart
-    categorical_expense = categoricalExpense() 
-
+    category_names, categorical_expense = categoricalExpense() 
+    #category_names = Categories.__table__.c.keys()
     # total expense months comparison bar chart
     monthly_expense = monthlyExpense()
     
-    return render_template('index.html', title="Budget Planner Dashboard", weekly_expense=weekly_expense, 
+    return render_template('index.html', title="Budget Planner Dashboard", weekly_expense=weekly_expense, category_names=category_names, 
                             categorical_expense=categorical_expense, monthly_expense=monthly_expense)
 
 
@@ -27,51 +27,61 @@ def income():
     form = IncomeForm()
     if form.validate_on_submit():
         if form.select_salary.data == "annual":
-            salary = form.salary.data
+            salary = form.salary.data / 12
         elif form.select_salary.data == "monthly":
-            salary = form.salary.data * 12
+            salary = form.salary.data
         elif form.select_salary.data == "weekly":
-            salary = form.salary.data * 52 
+            salary = form.salary.data * 4.33
 
         if form.select_tax.data == "annual":
-            tax = form.tax.data
+            tax = form.tax.data / 12
         elif form.select_tax.data == "monthly":
-            tax = form.tax.data * 12
+            tax = form.tax.data 
         elif form.select_tax.data == "weekly":
-            tax = form.tax.data * 52
+            tax = form.tax.data * 4.33
 
         if form.select_ni.data == "annual":
-            ni = form.ni.data
+            ni = form.ni.data / 12
         elif form.select_ni.data == "monthly":
-            ni = form.ni.data * 12
+            ni = form.ni.data 
         elif form.select_ni.data == "weekly":
-            ni = form.ni.data * 52
+            ni = form.ni.data * 4.33
             
         if form.select_pension.data == "annual":
-            pension = form.pension.data
+            pension = form.pension.data / 12
         elif form.select_pension.data == "monthly":
-            pension = form.pension.data * 12
+            pension = form.pension.data 
         elif form.select_pension.data == "weekly":
-            pension = form.pension.data * 52
+            pension = form.pension.data * 4.33
 
         if form.select_student_loan.data == "annual":
-            student_loan = form.student_loan.data
+            student_loan = form.student_loan.data / 12
         elif form.select_student_loan.data == "monthly":
-            student_loan = form.student_loan.data * 12
+            student_loan = form.student_loan.data 
         elif form.select_student_loan.data == "weekly":
-            student_loan = form.student_loan.data * 52
+            student_loan = form.student_loan.data * 4.33
 
+        take_home_pay = salary - tax - ni - pension - student_loan
+        
         income = Income(
                     salary = salary,
                     tax = tax,
                     ni = ni,
                     pension = pension,
-                    student_loan = student_loan
+                    student_loan = student_loan,
+                    take_home_pay = take_home_pay
                     )
+        
         db.session.add(income)
         db.session.commit()
-        return redirect(url_for('index'))
-    return render_template('income.html', title="Add income details", form=form)
+        return redirect(url_for('income'))
+
+    latest_income = Income.query.order_by(Income.id.desc()).first()
+    if latest_income == None:
+        monthly_pay = 0
+    else:
+        monthly_pay = latest_income.take_home_pay
+    return render_template('income.html', title="Add income details", form=form, monthly_pay=monthly_pay)
 
 
 @app.route('/add_category', methods=['POST', 'GET'])
@@ -115,7 +125,12 @@ def delete_category(id):
 
 @app.route('/add_expense', methods=['POST', 'GET'])
 def add_expense():
+    choices_cat = []
+    for item in Categories.query.all():
+        choices_cat.append(item.name)
+    
     form = ExpensesForm()
+    form.select_cat.choices = choices_cat
     if form.validate_on_submit():
         expense = Expenses(
                     name = form.name.data,
@@ -138,8 +153,13 @@ def view_expenses():
 @app.route('/edit_expense/<int:id>', methods=['GET', 'POST'])
 def edit_expense(id):
     expense = Expenses.query.get(id)
+    choices_cat = []
+    for item in Categories.query.all():
+        choices_cat.append(item.name)
+
     form = ExpensesForm(name = expense.name, select_cat = expense.category.name, 
                         amount = expense.amount, date = expense.date)
+    form.select_cat.choices = choices_cat
     if form.validate_on_submit():
         expense.name = form.name.data
         expense.amount = form.amount.data

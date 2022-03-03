@@ -25,13 +25,18 @@ def weeklyExpense():
 
 def categoricalExpense():
     categorical_expense = []
+    category_names = []
     month = date.today().month
     year = date.today().year
     first_date = date(year, month, 1)
     last_date = date(year, month, monthrange(year, month)[1])
     delta = last_date - first_date
 
-    for j in range(12):
+    all_categories = Categories.query.all()
+    for category in all_categories:
+        category_names.append(category.name)
+
+    for j in range(len(category_names)):
         expense_per_category = 0
         for i in range(delta.days + 1):
             month_date = first_date + timedelta(days=i)
@@ -41,8 +46,15 @@ def categoricalExpense():
         categorical_expense.append(expense_per_category)
     
     total_expense = sum(categorical_expense)
-    categorical_expense_percent = [x*100/total_expense for x in categorical_expense]
-    return categorical_expense_percent
+    income = Income.query.order_by(Income.id.desc()).first()
+    if income == None:
+        return None, None
+    else:
+        savings = income.take_home_pay - total_expense
+        category_names.append("Savings")
+        categorical_expense.append(savings)
+        categorical_expense_percent = [x*100/income.take_home_pay for x in categorical_expense]
+        return category_names, categorical_expense_percent
 
 
 def monthlyExpense():
