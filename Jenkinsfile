@@ -17,6 +17,7 @@ pipeline {
             steps {
                 sh 'docker-compose build'
             }
+        }
 
         stage('Push') {
 			steps {
