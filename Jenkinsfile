@@ -1,7 +1,6 @@
 pipeline {
     environment {
         DOCKER_LOGIN = credentials('DOCKER_LOGIN')
-        DOCKER_REGISTRY = "bishal86/budget_planner"
         DB_LOGIN = credentials('DB_LOGIN')
         DB_USER = "$DB_LOGIN_USR"
         DB_PASSWORD = "$DB_LOGIN_PSW"
@@ -13,16 +12,16 @@ pipeline {
     agent any
     stages {
 
-        stage('Build') {
-            steps {
-                sh 'docker-compose build'
-            }
-        }
+//        stage('Build') {
+ //           steps {
+ //               sh 'docker-compose build'
+ //           }
+ //       }
 
         stage('Push') {
 			steps {
 				sh 'echo $DOCKER_LOGIN_PSW | docker login -u $DOCKER_LOGIN_USR --password-stdin'
-                sh 'docker push'
+                sh 'docker-compose push'
 			}
 		}
     }
