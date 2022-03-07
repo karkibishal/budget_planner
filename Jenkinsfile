@@ -25,11 +25,11 @@ pipeline {
                 sh 'docker push $DOCKER_REGISTRY:$BUILD_NUMBER'
 			}
 		}
-
-		post {
-		    always {
-			    sh 'docker logout'
-		    }   
-	    }
     }
+    
+	post {
+		always {
+			sh 'docker logout'
+		}   
+	}
 }
