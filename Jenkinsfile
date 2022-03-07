@@ -22,7 +22,7 @@ pipeline {
         stage('Push') {
 			steps {
 				sh 'echo $DOCKER_LOGIN_PSW | docker login -u $DOCKER_LOGIN_USR --password-stdin'
-                sh 'docker push $DOCKER_REGISTRY:$BUILD_NUMBER'
+                sh 'docker push'
 			}
 		}
     }
