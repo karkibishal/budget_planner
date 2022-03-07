@@ -1,9 +1,13 @@
-version: "3.8"
+version: "3.7"
 services:
   app:
-    image: bishal86/budget_planner
+    build: .
+    environment:
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      SECRET_KEY: ${SECRET_KEY}
     ports:
     - target: 5000
       published: 5000
-    deploy:
-      replicas: 2
