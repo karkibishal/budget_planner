@@ -31,10 +31,14 @@ pipeline {
                     def remote = [:]
                     remote.name = 'master'
                     remote.host = '10.0.1.5'
-                    remote.user = 'bishal'
                     remote.knownHosts = '.ssh/known_hosts'
-                    remote.identityFile = '.ssh/id_rsa'
-                    sshCommand remote: remote, command: "ls -l"
+                    
+                    withCredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+                        remote.user = userName
+                        remote.identityFile = identity
+                        
+                        sshCommand remote: remote, command: "ls -l"
+                    }
                 }
             }
         }
