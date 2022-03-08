@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  webapp:
+    image: bishal86/budget_planner
+    ports:
+    - target: 5000
+      published: 5000
+    deploy:
+      replicas: 2

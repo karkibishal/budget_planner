@@ -32,12 +32,15 @@ pipeline {
                     remote.name = 'master'
                     remote.host = '10.0.1.5'
                     remote.knownHosts = '.ssh/known_hosts'
-                    
+
                     withCredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
                         remote.user = userName
                         remote.identityFile = identity
                         
                         sshCommand remote: remote, command: "ls -l"
+                        sshPut remote: remote, from: 'docker-stack.yml', into: '.'
+                        sshCommand remote: remote, command: "docker stack rm webapp"
+                        sshCommand remote: remote, command: "docker stack deploy --compose-file docker-stack.yml webapp"
                     }
                 }
             }
