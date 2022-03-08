@@ -28,10 +28,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'scp docker-stack.yml bishal@10.0.1.5:'
-                sh 'ssh -tt bishal@10.0.1.5 << ENDSSH
+                sh """ssh -tt bishal@10.0.1.5 << ENDSSH
                     docker stack deploy --compose-file docker-stack.yml webapp
                     exit
-                    ENDSSH'
+                    ENDSSH"""
             }
         }
     }
