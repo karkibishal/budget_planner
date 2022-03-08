@@ -40,6 +40,10 @@ pipeline {
                         sshCommand remote: remote, command: "ls -l"
                         sshPut remote: remote, from: 'docker-stack.yml', into: '.'
                         sshCommand remote: remote, command: "docker stack rm webapp"
+                        sshCommand remote: remote, command: "export DB_USER=$DB_USER"
+                        sshCommand remote: remote, command: "export DB_PASSWORD=$DB_PASSWORD"
+                        sshCommand remote: remote, command: "export DB_HOST=$DB_HOST"
+                        sshCommand remote: remote, command: "export DB_PORT=$DB_PORT"
                         sshCommand remote: remote, command: "docker stack deploy --compose-file docker-stack.yml webapp"
                     }
                 }
