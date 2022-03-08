@@ -12,23 +12,36 @@ pipeline {
     agent any
     stages {
 
-        stage('Build') {
+//        stage('Build') {
+//            steps {
+//                sh 'docker-compose build'
+//            }
+//        }
+
+//        stage('Push') {
+//			steps {
+//				sh 'echo $DOCKER_LOGIN_PSW | docker login -u $DOCKER_LOGIN_USR --password-stdin'
+//                sh 'docker-compose push'
+//			}
+//		}
+    
+        stage('Ssh to manager') {
             steps {
-                sh 'docker-compose build'
+                script {
+                    def remote = [:]
+                    remote.name = 'master'
+                    remote.host = '10.0.1.5'
+                    remote.user = 'bishal'
+                    remote.allowAnyHosts = true
+                    sshCommand remote: remote, command: "echo Hello for jenkins!"
+                }
             }
         }
-
-        stage('Push') {
-			steps {
-				sh 'echo $DOCKER_LOGIN_PSW | docker login -u $DOCKER_LOGIN_USR --password-stdin'
-                sh 'docker-compose push'
-			}
-		}
     }
     
-	post {
-		always {
-			sh 'docker logout'
-		}   
+//	post {
+//		always {
+//			sh 'docker logout'
+//		}   
 	}
 }
