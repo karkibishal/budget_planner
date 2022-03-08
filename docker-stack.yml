@@ -6,4 +6,4 @@ services:
     - target: 5000
       published: 5000
     deploy:
-      replicas: 2
+      replicas: 1
