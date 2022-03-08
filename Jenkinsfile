@@ -33,6 +33,7 @@ pipeline {
                     remote.host = '10.0.1.5'
                     remote.user = 'bishal'
                     remote.knownHosts = '.ssh/known_hosts'
+                    remote.identityFile = '.ssh/id_rsa'
                     sshCommand remote: remote, command: "ls -l"
                 }
             }
