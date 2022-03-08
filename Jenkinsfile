@@ -25,7 +25,7 @@ pipeline {
 			}
 		}
     
-        stage('Ssh to manager') {
+        stage('Deploy') {
             steps {
                 script {
                     def remote = [:]
