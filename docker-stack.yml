@@ -2,8 +2,14 @@ version: "3.7"
 services:
   webapp:
     image: bishal86/budget_planner
+    environment:
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      SECRET_KEY: ${SECRET_KEY}
     ports:
     - target: 5000
       published: 5000
     deploy:
-      replicas: 1
+      replicas: 2

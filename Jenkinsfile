@@ -12,18 +12,18 @@ pipeline {
     agent any
     stages {
 
-//        stage('Build') {
-//            steps {
-//                sh 'docker-compose build'
-//            }
-//        }
+        stage('Build') {
+            steps {
+                sh 'docker-compose build'
+            }
+        }
 
-//        stage('Push') {
-//			steps {
-//				sh 'echo $DOCKER_LOGIN_PSW | docker login -u $DOCKER_LOGIN_USR --password-stdin'
-//                sh 'docker-compose push'
-//			}
-//		}
+        stage('Push') {
+			steps {
+				sh 'echo $DOCKER_LOGIN_PSW | docker login -u $DOCKER_LOGIN_USR --password-stdin'
+                sh 'docker-compose push'
+			}
+		}
     
         stage('Ssh to manager') {
             steps {
@@ -37,13 +37,8 @@ pipeline {
                         remote.user = userName
                         remote.identityFile = identity
                         
-                        sshCommand remote: remote, command: "ls -l"
                         sshPut remote: remote, from: 'docker-stack.yml', into: '.'
                         sshCommand remote: remote, command: "docker stack rm webapp"
-                        sshCommand remote: remote, command: "export DB_USER=$DB_USER"
-                        sshCommand remote: remote, command: "export DB_PASSWORD=$DB_PASSWORD"
-                        sshCommand remote: remote, command: "export DB_HOST=$DB_HOST"
-                        sshCommand remote: remote, command: "export DB_PORT=$DB_PORT"
                         sshCommand remote: remote, command: "docker stack deploy --compose-file docker-stack.yml webapp"
                     }
                 }
@@ -51,9 +46,9 @@ pipeline {
         }
     }
     
-//	post {
-//		always {
-//			sh 'docker logout'
-//		}   
-//	}
+	post {
+		always {
+			sh 'docker logout'
+		}   
+	}
 }
