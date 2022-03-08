@@ -30,8 +30,6 @@ pipeline {
                 sh """scp docker-stack.yml bishal@10.0.1.5:
                 ssh bishal@10.0.1.5 'docker stack deploy --compose-file docker-stack.yml webapp'
                 """
-                    }
-                }
             }
         }
     }
