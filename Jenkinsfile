@@ -32,8 +32,8 @@ pipeline {
                     remote.name = 'master'
                     remote.host = '10.0.1.5'
                     remote.user = 'bishal'
-                    remote.allowAnyHosts = true
-                    sshCommand remote: remote, command: "echo Hello for jenkins!"
+                    remote.knownHosts = '.ssh/known_hosts'
+                    sshCommand remote: remote, command: "ls -l"
                 }
             }
         }
