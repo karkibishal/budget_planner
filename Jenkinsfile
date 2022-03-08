@@ -34,6 +34,16 @@ pipeline {
                     ENDSSH"""
             }
         }
+
+        stage('Nginx load balancer') {
+            steps{
+                sh """scp nginx.conf bishal@10.0.1.8:
+                ssh bishal@10.0.1.8 'docker rm -f nginx'
+                ssh bishal@10.0.1.8  'docker run -d -p 80:80 --name nginx --mount type=bind,source=/home/bishal/nginx.conf,target=/etc/nginx/nginx.conf nginx'
+                """
+            }
+        }
+
     }
     
 	post {
