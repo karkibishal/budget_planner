@@ -17,7 +17,7 @@ def index():
     # total expense months comparison bar chart
     monthly_expense = monthlyExpense()
     
-    return render_template('index.html', title="Budget Planner Dashboard", weekly_expense=weekly_expense, category_names=category_names, 
+    return render_template('index.html', title="Budget Tracker Dashboard", weekly_expense=weekly_expense, category_names=category_names, 
                             categorical_expense=categorical_expense, monthly_expense=monthly_expense)
 
 
