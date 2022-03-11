@@ -29,3 +29,7 @@ class Income(db.Model):
     student_loan = db.Column(db.Float, nullable = False, default = 0.0)
     take_home_pay = db.Column(db.Float, nullable = False, default = salary)
     date = db.Column(db.Date, nullable = False, default = date.today)
+
+
+if __name__ == '__main__':
+    db.create_all()

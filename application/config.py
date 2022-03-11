@@ -2,7 +2,7 @@ import os
 
 FLASK_ENV = 'development'
 DEBUG = True
-TESTING = True
+TESTING = False
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 db_conn_data = {"DB_USER": os.getenv("DB_USER"),

@@ -55,10 +55,7 @@ class CategoriesForm(FlaskForm):
 
 
 class ExpensesForm(FlaskForm):
-    choices_cat = []
-    for item in Categories.query.all():
-        choices_cat.append(item.name)
-
+    
     select_cat = SelectField("Category")
     name = StringField("Expense Description", validators = [InputRequired()])
     date = DateField("Date", default = date.today, validators = [InputRequired()])
