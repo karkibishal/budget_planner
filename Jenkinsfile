@@ -12,6 +12,26 @@ pipeline {
     agent any
     stages {
 
+        stage('Setup') {
+            steps {
+                sh """sudo apt install python3-venv -y 
+                python3 -m venv venv
+                . ./venv/bin/activate
+                pip3 install -r requirements.txt
+                """
+                }
+        }
+
+        stage('Test') {
+            steps {
+                sh """ . ./venv/bin/activate
+                coverage run tests.py
+                coverage xml
+                deactivate
+                rm -rf /venv""" 
+            }
+        }
+
         stage('Build') {
             steps {
                 sh 'docker-compose build'
@@ -41,6 +61,13 @@ pipeline {
                 ssh bishal@10.0.1.8 'docker rm -f nginx'
                 ssh bishal@10.0.1.8  'docker run -d -p 80:80 --name nginx --mount type=bind,source=/home/bishal/nginx.conf,target=/etc/nginx/nginx.conf nginx'
                 """
+            }
+        }
+
+        stage('Test results') {
+            steps{
+                cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
+                archiveArtifacts artifacts: '*.xml', followSymlinks: false
             }
         }
 
