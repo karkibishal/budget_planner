@@ -31,7 +31,7 @@ class TestGetResponse(TestBase):
     def test_index_get(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code,200)
-        #self.assertIn(b'Budget Planner Dashboard', response.data)
+        self.assertIn(b'Budget Planner Dashboard', response.data)
 
     def test_income_get(self):
        response = self.client.get('/income')
@@ -77,19 +77,33 @@ class TestPostResponse(TestBase):
                         'name':'Utilities'})
         self.assertEqual(response.status_code, 200)
         test = Categories.query.filter_by(id=2).first()
+        assert test.id == 2
+        assert test.name == "Utilities"
+
+    def test_add_expense(self):
+        response = self.client.post('/add_expense',
+                    data = {'id':2, 
+                        'name':'water',
+                        'amount': 120})
+        self.assertEqual(response.status_code, 200)
+        test = Categories.query.filter_by(id=2).first()
+        assert test.id == 2
+        assert test.name == "water"
+        assert test.amount == 120
                         
     def test_delete_category(self):
         response = self.client.post('/delete_category/1',
-                                    data = {'name' : 'Household'})
-        self.assertEqual(response.status_code, 405)
+                                    data = {'id' : 1})
+        self.assertEqual(response.status_code, 200)
 
     def test_delete_expense(self):
-        response = self.client.post('/delete_expense/1')
-        self.assertEqual(response.status_code, 405)
+        response = self.client.post('/delete_expense/1',
+                                    data = {'id' : 1})
+        self.assertEqual(response.status_code, 200)
 
     def test_edit_category(self):
         response = self.client.post('/edit_category/1',
-                                    data = {'name' : 'Household'})
+                                    data = {'id' : 1})
         self.assertEqual(response.status_code, 200)
 
     def test_income(self):
