@@ -23,8 +23,8 @@ This project is the final submission for the QA DevOps bootcamp. I have develope
 
 ## 3. Objectives
 - To create a web application that integrates with a database and demonstrates CRUD functionality.
-- To utilise containers to host and deploy your application.
-- To create a continuous integration (CI)/continuous deployment (CD) pipeline that will automatically test, build and deploy your application
+- To utilise containers to host and deploy the application.
+- To create a continuous integration (CI)/continuous deployment (CD) pipeline that will automatically test, build and deploy the application
 
 ## 4. Risk Assessment
 Before embarking on the project, it is necessary to identify, assess and plan for the risks associated. The following matrix details the risks that were identified before starting the project.

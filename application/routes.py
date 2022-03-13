@@ -13,13 +13,12 @@ def index():
 
     # expense category percentage in a month doughnut chart
     category_names, categorical_expense = categoricalExpense() 
-    #category_names = Categories.__table__.c.keys()
+    
     # total expense months comparison bar chart
     monthly_expense = monthlyExpense()
     
     return render_template('index.html', title="Budget Tracker Dashboard", weekly_expense=weekly_expense, category_names=category_names, 
                             categorical_expense=categorical_expense, monthly_expense=monthly_expense)
-
 
 
 @app.route('/income', methods=['POST', 'GET'])
@@ -143,12 +142,10 @@ def add_expense():
         return redirect(url_for('add_expense'))
     return render_template('add_expense.html', title="Add expense items", form=form)
 
-
 @app.route('/view_expenses', methods=['POST', 'GET'])
 def view_expenses():
     all_expenses = Expenses.query.all()
     return render_template('view_expenses.html', title="View expenses", all_expenses=all_expenses)
-
 
 @app.route('/edit_expense/<int:id>', methods=['GET', 'POST'])
 def edit_expense(id):
@@ -170,7 +167,6 @@ def edit_expense(id):
     elif request.method == 'GET':
         form = form
     return render_template('edit_expense.html', title='Edit expense items', form=form)
-
 
 @app.route('/delete_expense/<int:id>')
 def delete_expense(id):
